@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>无限滚动效果</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		#header{
+			width: 100%;
+			height: 50px;
+			background-color: #666699;
+			text-align: center;
+			line-height: 50px;
+			margin-bottom: 5px;
+		}
+		#main ul li{
+			height: 55px;
+			border: 1px solid #999999;
+			border-radius: 4px;
+			background-color: #CCCCCC;
+			font-size:30px;
+			font-weight: bold;
+			text-align: center;
+			line-height: 55px;
+		}
+		#footer{
+			margin: 0 auto;
+			margin-top: 3px;
+			height: 55px;
+			width: 300px;
+			background-color: #996666;
+			text-align: center;		
+			border-radius: 4px;
+		}
+		#footer p{
+			line-height: 55px;
+		}
+	</style>	
+</head>
+<body>
+	<div id="header">
+		<h3>This is header!</h3>
+	</div>
+	<div id="main">
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+			<li>6</li>
+			<li>7</li>
+			<li>8</li>
+			<li>9</li>
+			<li>10</li>
+		</ul>
+	</div>
+	<div id="footer">
+		<p>加载中...</p>
+	</div>
+</body>
+<script type="text/javascript">
+	var main = document.getElementById("main");
+	var ul = main.getElementsByTagName('ul')[0];
+	var lis = ul.getElementsByTagName('li');
+	
+	function getAmount(){
+		for (var i = 0; i < lis.length; i++) {
+			return lis[lis.length-1].innerHTML;
+		}
+	}
+
+	function add(){
+		var len = parseInt(getAmount());
+		if (len < 40) {
+			for (var i = 0; i < 10; i++) {
+				var create = document.createElement("li");
+				create.innerHTML = len + 1;
+				ul.appendChild(create);
+				len = parseInt(getAmount());
+				console.log(len);
+			}
+		}else{
+			var footer = document.getElementById("footer");
+			footer.style.visibility = "hidden";
+		}
+	}
+	
+	var timer = null;
+	function scroll(){
+		var footer = document.getElementById("footer");
+		var offsetTop = footer.offsetTop;
+		var total = (document.documentElement.clientHeight||document.body.clientHeight) + (document.documentElement.scrollTop||document.body.scrollTop);
+		var len = parseInt(getAmount());
+		if (offsetTop < total) {
+			clearTimeout(timer);
+			timer = setTimeout(add,1000);
+			// add();	
+		}
+		if (len == 40) {
+			footer.style.visibility = "hidden";
+		}
+	}
+
+	window.onscroll = function(){
+		scroll();
+	}
+	
+	
+</script>
+</html>

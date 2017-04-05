@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		#container{
+			width: 300px;
+			margin: 0 auto;
+
+		}
+		img{
+			width: 300px;
+			height: 200px;
+			/*display: none;*/
+
+		}
+	</style>
+</head>
+<body>
+	<div id="container">
+		<img src="" alt="加载中" data-original="images/1.jpg">
+		<img src="" alt="加载中" data-original="images/2.jpg">
+		<img src="" alt="加载中" data-original="images/3.jpg">
+		<img src="" alt="加载中" data-original="images/4.jpg">
+		<img src="" alt="加载中" data-original="images/5.jpg">
+		<img src="" alt="加载中" data-original="images/6.jpg">
+		<img src="" alt="加载中" data-original="images/7.jpg">
+		<img src="" alt="加载中" data-original="images/8.jpg">
+		<img src="" alt="加载中" data-original="images/9.jpg">
+		<img src="" alt="加载中" data-original="images/10.jpg">
+		<img src="" alt="加载中" data-original="images/11.jpg">
+		<img src="" alt="加载中" data-original="images/12.jpg">
+		<img src="" alt="加载中" data-original="images/13.jpg">
+		<img src="" alt="加载中" data-original="images/14.jpg">
+		<img src="" alt="加载中" data-original="images/15.jpg">
+		<img src="" alt="加载中" data-original="images/16.jpg">
+		<img src="" alt="加载中" data-original="images/17.jpg">
+		<img src="" alt="加载中" data-original="images/18.jpg">
+		<img src="" alt="加载中" data-original="images/19.jpg">
+		<img src="" alt="加载中" data-original="images/20.jpg">
+		<img src="" alt="加载中" data-original="images/21.jpg">
+		<img src="" alt="加载中" data-original="images/22.jpg">
+		<img src="" alt="加载中" data-original="images/23.jpg">
+		
+	</div>
+</body>
+<script type="text/javascript">
+	
+	var imgs = document.getElementsByTagName('img');
+	var clientHeight = document.documentElement.clientHeight||document.body.clientHeight;
+	function show(){
+		var scrollTop = document.documentElement.scrollTop||document.body.scrollTop;
+		for (var i = 0; i < imgs.length; i++) {
+			var offsetTop = imgs[i].offsetTop;
+			if (offsetTop<(clientHeight+scrollTop)&&!imgs[i].isload) {
+				imgs[i].style.cssText = "transition: '';opacity:0";
+				imgs[i].isload = true;
+				if (imgs[i].dataset) {
+					imgs[i].src = imgs[i].dataset.original;
+				}else{
+					imgs[i].src = imgs[i].getAttribute("data-original");
+				}
+				(function(i){
+					setTimeout(function(){
+						imgs[i].style.cssText = "transition: 1s;opacity:1";
+					},16);
+				})(i);
+			}
+		}
+	}
+	show();
+	window.onscroll = function(){
+		show();
+	} 
+
+	
+// var aImages = document.getElementsByTagName('img');
+// loadImg(aImages);
+// window.onscroll = function(){
+//   loadImg(aImages);
+// };
+// function loadImg(arr){
+//   for( var i = 0,len = arr.length; i < len; i++){
+//     if(arr[i].getBoundingClientRect().top < document.documentElement.clientHeight && !arr[i].isLoad){
+//       arr[i].isLoad = true;
+//       arr[i].style.cssText = "transition: ''; opacity: 0;"
+//       if(arr[i].dataset){
+//         // aftLoadImg(arr[i],arr[i].dataset.original);  
+//         arr[i].src = arr[i].dataset.original;
+//       }else{
+//         // aftLoadImg(arr[i],arr[i].getAttribute("data-original"));
+//         arr[i].src = arr[i].getAttribute("data-original");
+//       }
+//       (function(i){
+//         setTimeout(function(){
+//           arr[i].style.cssText = "transition: 1s; opacity: 1;"
+//           // arr[i].style.display = "block";
+//         },16)
+//       })(i);
+//     }
+//   }
+// }
+// function aftLoadImg(obj,url){
+//   var oImg = new Image();
+//   oImg.onload = function(){
+//     obj.src = oImg.src;
+//   }
+//   oImg.src = url;
+// }
+
+</script>
+</html>
